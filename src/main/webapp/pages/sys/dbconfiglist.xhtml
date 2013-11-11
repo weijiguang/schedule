@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/maintemplate.xhtml">
+
+    <ui:define name="main">
+        <h:form id="form">
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:dataTable id="properties" var="p" value="#{dbProperties.propertyList}" editable="true">
+
+                <!--<p:ajax event="rowEdit" listener="#{dbProperties.onEdit}" update=":form:messages" />-->  
+                <!--<p:ajax event="rowEditCancel" listener="#{dbProperties.onCancel}" update=":form:messages" />--> 
+
+                <p:column headerText="键" style="width: 30%;text-align: right;">
+                    <h:outputText value="#{p.key}"/>
+                </p:column>
+                <p:column headerText="值" style="width: 60%;">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{p.value}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{p.value}" style="width:100%" label="数据库连接属性值"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="操作" style="width:10%;padding-left: 6px;">  
+                    <p:rowEditor />  
+                </p:column>  
+            </p:dataTable>
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+                    <p:commandButton id="backbtn" value="返回" icon="ui-icon-pencil" ajax="false" action="/pages/job/list"/>  
+                    <p:commandButton id="savebtn" value="保存" icon="ui-icon-pencil" ajax="false" action="#{dbProperties.save()}"/> 
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:confirmDialog id="confirmDialog" message="Are you sure about destroying the world?"  
+                             header="Initiating destroy process" severity="alert" widgetVar="confirmation">  
+                <p:commandButton id="confirm" value="是" update="messages" oncomplete="confirmation.hide()"  
+                                 actionListener="#{buttonBean.destroyWorld}" />  
+                <p:commandButton id="decline" value="否" onclick="confirmation.hide()" type="button" />   
+            </p:confirmDialog>  
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,310 @@
+body {
+    margin: 0px;
+    padding: 0;
+    /*color: #616161;*/
+    background-color: #333333;    
+    color: #999999;  
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 1.6em;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1em;
+    margin-top:20px;
+}
+
+ul {
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a img {
+    border: none;
+}
+
+img.left {
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+img.right {
+    float: right;
+    margin: 0 0 0 20px;
+}
+
+/* Header */
+#header {
+    padding: 4px 0px;
+    height: 90px;
+    position: relative;
+}
+
+#logo {
+    text-align: left;
+}
+
+/* Menu */
+#menu {
+    position: absolute;
+    top:25px;
+    right:15px;
+    padding: 0;
+    height: 59px;
+    overflow: hidden;
+}
+
+#menu ul {
+    margin: 0;
+    list-style: none;
+}
+
+#menu li {
+    display: inline;
+}
+
+#menu li a {
+    display: block;
+    float: left;
+    height: 42px;
+    margin: 0;
+    padding: 18px 40px 0 40px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#menu li a:hover {
+    text-decoration: underline;
+}
+
+#globalthemeswitcher {
+    position:absolute;
+    top:5px;
+    right:50px;
+}
+
+/* Page */
+#page {
+    padding: 10px 0px;
+    background: #FFFFFF;
+}
+
+/* Content */
+#content {
+    width: 70%;
+    float:left;
+}
+
+.post {
+    padding-bottom: 15px;
+}
+
+.post h1 {
+    font-weight: normal;
+}
+
+.title {
+    height: 30px;
+    margin-left: 10px;
+    padding: 8px 0 0 20px;
+}
+
+.title a {
+    border-bottom: none;
+    color: #FFFFFF;
+}
+
+.title a:hover {
+    border-bottom: 1px dotted #000000;
+}
+
+.submenu-title {
+    padding: 4px 10px;
+}
+
+.submenu-content {
+    text-align:center;
+}
+
+.byline {
+    margin: -60px 20px 20px 20px;
+}
+
+.byline a {
+    color: #DC8700;
+}
+
+.tag {
+    padding: 0 15px;
+}
+
+.entry {
+    padding: 0 20px;
+}
+
+.entry p {
+    line-height: 200%;
+}
+
+.links {
+    padding: 4px 0px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.links a {
+    border: none;
+}
+
+.links a:hover {
+}
+
+#sidebar {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+    margin-left: -1px;
+    overflow: hidden;
+}
+
+#sidebar a.ui-state-hover, 
+#sidebar a.ui-state-highlight {
+    border:0 none;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#sidebar table {
+    width: 100%;
+}
+
+#sidebar table td {
+    vertical-align: top;
+}
+
+#sidebar ul {
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar ul li {
+    list-style-type: none;
+    padding: 1px;
+}
+
+/* Footer */
+#footer {
+    height: 70px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 25px 0 0 0;
+    text-align: center;
+}
+
+#footer a {
+}
+
+#footer .link {
+    float: right;
+}
+
+#footer .copyright {
+    float: left;
+}
+
+.homeText {
+    line-height: 175%;
+}
+
+.homeMenu {
+    width:200px;
+    float:left;
+    margin-right:10px
+}
+
+.themeMenu {
+    overflow: auto;
+    height:300px;
+    width:200px;
+}
+
+.dp-xml {
+    width:1000px;
+}
+
+.ui-themeswitcher a.ui-selectonemenu-label-container {
+    text-decoration: none !important;
+}
+
+.ui-widget {
+    font-size: 12px !important;
+}
+
+.header-bg{
+    vertical-align:middle;
+    background-image: url("#{resource['images/images/bg:header.jpg']}");
+    font-size: 60px;
+    text-align: center;
+    height: 80px;
+    font-family:Segoe UI, Verdana, sans-serif;  
+    line-height: 80px;  
+    text-shadow: -3px 0 4px #006; 
+    /*font-style:*/ 
+    font-weight: bold;
+    color: chartreuse;    
+}
+.middle-demo-1{
+    text-align: center;
+    /*    height: 4em;
+        line-height: 4em;
+        overflow: hidden;*/
+}
+.middle-demo-3{
+    display: table-cell;
+    height: 300px;
+    /*width: 100%;*/
+    vertical-align: middle;
+}
+
+.growl_center_show{
+    /*padding:0;*/
+    /*margin:0;*/
+    /*width:30%;*/
+    position:fixed;
+    top:40%;
+    left:35%;
+    /*text-align: center;*/
+    color:#000;
+    /*border:3px solid #aaa;*/
+    background-color: #fff;
+    /*cursor:wait;*/
+    /*opacity:0.8;*/
+}
+.main-body-bg-img{
+    background-image: url("#{resource['images/images/bg:landscape-3.jpg']}");
+}
+
+.font-weight{
+    font-weight: bold;
+}

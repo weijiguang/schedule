@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <title>数据交换系统</title>
+            </f:facet>  
+            <!--  
+            <h:outputScript> 和 <h:outputStylesheet> 标记有两个属性，分别指定了脚本或样式表：
+            library 和 name。library 名称对应于 resources 目录下的子目录，
+            这是保存资源的位置。例如，如果在 resources/css/en 目录中有一个样式表，
+            那么 library 将为 css/en。
+            注：
+            <h:outputScript> 和 <h:outputStylesheet> 应当位于<h:head>或<h:body>中，
+            不能位于<html>中，否则无效。
+            使用这两个标记可以确保引用资源的url不随页面相对资源的路径变化而变化，
+            极大的提升了页面的可流动性。
+            -->
+            <h:outputStylesheet library="css" name="default.css"/>
+            <h:outputStylesheet library="css/syntaxhighlighter" name="syntaxhighlighter.css"/>  
+            <h:outputScript library="syntaxhighlighter/scripts" name="sh.js"/>
+            <ui:insert name="head"></ui:insert>
+
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-12200033-3']);
+                _gaq.push(['_trackPageview']);
+
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+
+            </script>
+            <script language="javascript">
+                dp.SyntaxHighlighter.ClipboardSwf = "#{resource['syntaxhighlighter/scripts:clipboard.swf']}";
+                dp.SyntaxHighlighter.HighlightAll('code');            
+            </script>
+        </h:head>
+
+        <h:body>            
+            <ui:insert name="status">
+                <p:ajaxStatus style="width:40px;height:40px;position:fixed;right:20px;bottom:20px">
+                    <f:facet name="start">
+                        <p:graphicImage library="images/images" name="ajax-loader.gif" alt="busy"/>
+                        <!--                         <h:graphicImage library="images" name="ajax-loader.gif" alt="busy" />-->
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value="" />
+                    </f:facet>
+                </p:ajaxStatus>
+            </ui:insert>
+            <p:layout fullPage="true">
+                <p:layoutUnit id="header" position="north" resizable="true" collapsible="true"> 
+                    <ui:insert name="top">
+                        <ui:include src="../templates/section/default_header.xhtml"/>
+                    </ui:insert>
+                </p:layoutUnit>  
+
+                <!--                <p:layoutUnit position="west" size="50%" resizable="false" collapsible="false">  
+                                    <ui:insert name="left">
+                                        <h:outputText value="left"/>
+                                    </ui:insert>                 
+                                </p:layoutUnit>  -->
+
+                <p:layoutUnit position="south" size="50" resizable="true" collapsible="true"> 
+                    <ui:insert name="bottom">
+                        <div align="center" style="font-size: x-large;">
+                            <h:outputText value="©2012 版权所有" /> 
+                        </div>
+                    </ui:insert>
+                </p:layoutUnit>      
+
+                <p:layoutUnit position="center"> 
+                    <ui:insert name="main">
+                        <h:form>  
+                            This fullPage layout consists of five different layoutUnits which are resizable and closable by default.  
+
+                        </h:form>
+                    </ui:insert>
+                </p:layoutUnit>  
+
+            </p:layout>
+        </h:body>  
+
+    </f:view>
+</html>

@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:shiro="http://shiro.apache.org/tags" 
+                template="/templates/maintemplate.xhtml">
+
+    <ui:define name="main">
+        <h1 class="title ui-widget-header ui-corner-all">Confirm Dialog</h1>
+       
+
+            <h:form >
+
+                <p:growl id="messages" showDetail="true" />
+
+                <p:commandButton id="showDialogButton" value="Destroy the World" onclick="confirmation.show();" type="button"/>
+
+                <p:confirmDialog id="confirmDialog" message="Are you sure about destroying the world?"
+                                 header="Initiating destroy process" severity="alert" widgetVar="confirmation" appendToBody="true">
+
+                    <p:commandButton id="confirm" value="Yes Sure" process="@this" oncomplete="confirmation.hide()"/>
+                    <p:commandButton id="decline" value="Not Yet" onclick="confirmation.hide();" type="button" /> 
+
+                </p:confirmDialog>
+
+               
+                
+            </h:form>	
+        
+        
+
+    </ui:define>    
+</ui:composition>

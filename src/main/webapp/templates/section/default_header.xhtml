@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <div id="header"> 
+            <h:form>
+                <div align="right" style="width: 90%;">
+                    <h:commandLink id="logout" action="${loginController.logout()}" value="注销" style="color: #99ff00;"/>
+                </div>
+            </h:form>
+            <h:graphicImage id="name" library="images/images/logo" name="zk_dataswap_logo_watercolor.jpg" width="99%" height="80px"/>
+            <!--<h:graphicImage library="images/bg" name="office-2.png" style="height: 70px;"/>-->
+            <!--<marquee  behavior="scroll">-->
+            <!--            <h:outputText value="ZK-EMR全院电子病历集成系统V2.0"/>
+                        <h:outputText value="通用智能数据交换子系统"/>   -->
+            <!--</marquee>-->  
+        </div>
+    </h:body>
+</html>

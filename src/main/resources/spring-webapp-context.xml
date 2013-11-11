@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+>
+           
+    <!-- Activates scanning of @Autowired -->
+    <!-- 激活spring的注解. -->
+    <context:annotation-config/>      
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+    <context:component-scan base-package="com.weir"/>      
+        
+    <!-- 加载jdbc配置信息资源文件 -->
+    <!--不管是在一个Spring文件还是在多个Spring文件被统一加载资源文件(*.properties)的情况下，-->
+    <!--直接写 <context:property-placeholder location="" />  是不允许的。-->
+    <!--应写成 <context:property-placeholder ignore-unresolvable="true" location=""/>-->
+    <!--否则会发生Could not resolve placeholder异常-->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath*:quartz.properties"/>
+    <!-- 创建简单data source连接quartz的数据库，并立即（lazy-init="false"）初始化数据结构 -->
+    <bean id="quartzDS" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" lazy-init="false">
+        <property name="driverClass" value="${org.quartz.dataSource.myDS.driver}" />
+        <property name="url" value="${org.quartz.dataSource.myDS.URL}" />
+        <property name="username" value="${org.quartz.dataSource.myDS.user}" />
+        <property name="password" value="${org.quartz.dataSource.myDS.password}" />
+    </bean>
+
+    <!-- 初始化quartz数据结构 -->
+    <jdbc:initialize-database data-source="quartzDS" ignore-failures="ALL">
+        <jdbc:script location="classpath:sql/quartz/tables_h2.sql" />
+    </jdbc:initialize-database>
+    
+    <import resource="db_local_tx.xml" />
+    <import resource="dao-context.xml"/>
+    
+    <bean id="SpringApplicationContext" class="com.weir.schedule.application.ApplicationContextHandler"/>
+    <beans>
+        <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+            <property name="scopes">
+                <map>
+                    <entry key="view">
+                        <bean class="com.weir.frameworks.extend.springextend.ViewScope"/>
+                    </entry>
+                </map>
+            </property>
+        </bean>      
+    </beans>     
+</beans>

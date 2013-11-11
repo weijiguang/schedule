@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/maintemplate.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="main"> 
+        <h:form id="form"> 
+            <!--<p:messages id="messages" autoUpdate="true" closable="true" globalOnly="true"/>--> 
+            <p:growl id="messages" autoUpdate="true" globalOnly="true" life="3000"/>
+            <div>
+                <p:dataTable id="jobs" var="job" value="#{jobBean.jobs}" rowKey="#{job.name}" selection="#{jobBean.selectedJob}" 
+                             selectionMode="single" emptyMessage="没有数据" resizableColumns="false"   
+                             >
+                    <p:column> 
+                        <f:facet name="header">  
+                            <h:outputText value="任务名称" />  
+                        </f:facet>
+                        <h:outputText value="#{job.name}" />  
+                    </p:column>
+                    <p:column> 
+                        <f:facet name="header">  
+                            <h:outputText value="触发时间" />  
+                        </f:facet>
+                        <h:outputText value="#{job.cronex}" />
+                    </p:column>
+                    <p:column> 
+                        <f:facet name="header">  
+                            <h:outputText value="描述" />  
+                        </f:facet>
+                        <h:outputText value="#{job.description}" />  
+                    </p:column> 
+                    <p:column> 
+                        <f:facet name="header">  
+                            <h:outputText value="状态" />  
+                        </f:facet>   
+                        <h:outputText value="#{job.state}"  />  
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:commandButton id="pause" value="暂停" icon="ui-icon-power" update=":form:jobs" action="#{jobBean.pauseJob()}"/>  
+                    <p:commandButton id="resume" value="恢复" icon="ui-icon-circle-triangle-e" update=":form:jobs" action="#{jobBean.resumeJob()}"/>  
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:commandButton id="detail" update=":form:display" oncomplete="jobDialog.show()"
+                                     value="详情" icon="ui-icon-search"/>
+                    <p:commandButton id="edit" value="编辑" icon="ui-icon-pencil"/>  
+                    <p:separator/>  
+                    <p:commandButton id="add" value="增加" icon="ui-icon-circle-plus" action="#{jobBean.prepareAdd()}" ajax="false" immediate="true"/>
+                    <p:commandButton id="remove" onclick="confirmation.show()"
+                                     value="移除" icon="ui-icon-circle-close"/>  
+                    <p:separator/>  
+                    <p:commandButton id="dbSetting" value="数据库连接设置" ajax="false" icon="ui-icon-power" action="#{taskDBConfig.list()}" immediate="true"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:confirmDialog id="confirmDialog" message="确认移除?" height="52" width="200" style="font-weight: bold;font-size: larger;"
+                             header="移除提示" severity="alert"  widgetVar="confirmation" appendToBody="true">
+                <p:commandButton id="confirm" value="是" update=":form:messages :form:jobs" oncomplete="confirmation.hide()"  
+                                 action="#{jobBean.remove()}" icon="ui-icon-check" />                
+                <p:commandButton id="decline" value="否" icon="ui-icon-close" onclick="confirmation.hide()" type="button" />                
+            </p:confirmDialog>  
+
+            <p:dialog id="dialog" header="任务详情" widgetVar="jobDialog" resizable="true"  
+                      showEffect="clip" hideEffect="fold" height="600" width="800" >  
+
+                <h:panelGrid id="display" columns="2" style="font-size: larger;font-weight: bold;" cellspacing="20">  
+                    <h:outputText value="任务名称:" />  
+                    <h:outputText value="#{jobBean.selectedJob.name}" />  
+                    <h:outputText value="触发时间:" />  
+                    <h:outputText value="#{jobBean.selectedJob.cronex}" /> 
+                    <h:outputText value="任务描述:" />  
+                    <h:outputText value="#{jobBean.selectedJob.description}" /> 
+                    <h:outputText value="状态:" />  
+                    <h:outputText value="#{jobBean.selectedJob.state}" /> 
+                    <h:outputText value="条件限定语句(SQL):" />  
+                    <h:outputText value="#{jobBean.selectedJob.conditionSQL}" style="word-break: break-all;"/>  
+                    <h:outputText value="源数据查询语句(SQL):" />  
+                    <h:outputText value="#{jobBean.selectedJob.sourceSQL}" style="word-break: break-all;" /> 
+                    <h:outputText value="目标数据操作语句(SQL):" />  
+                    <h:outputText value="#{jobBean.selectedJob.targetSQL}" style="word-break: break-all;" /> 
+                </h:panelGrid>  
+
+            </p:dialog>  
+
+        </h:form>   
+    </ui:define>
+</ui:composition>

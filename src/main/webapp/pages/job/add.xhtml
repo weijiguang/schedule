@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/maintemplate.xhtml">
+
+    <ui:define name="main">        
+        <h:form id="form">
+            <p:messages id="messages" autoUpdate="true" closable="true" globalOnly="true" /> 
+            <h:panelGrid id="jobdata"  columns="3" cellpadding="5" style="font-size: medium;font-style: normal;">
+                <p:outputLabel  for="taskname" value="任务名称："/>
+                <p:inputText id="taskname" size="60" value="#{jobBean.jd.name}" maxlength="60" required="true" 
+                             label="任务名称" validatorMessage="任务名称必须是字母、数字、长度小于60且不能包含空格" 
+                             title="任务名称必须是字母、数字、长度小于60且不能包含空格">
+                    <f:validateRegex pattern="^[A-Za-z0-9]{1,60}$"/>                       
+                </p:inputText>                
+                <p:message id="tasknameMessage" for="taskname" /> 
+                <p:outputLabel for="taskdescription" value="任务描述:"/>
+                <p:inputText id="taskdescription" size="60" value="#{jobBean.jd.description}" maxlength="200" 
+                             required="true" label="任务描述"/>
+                <p:message id="taskdescriptionMessage" for="taskdescription" /> 
+                <p:outputLabel for="trigexp" value="触发时间配置:"/>
+                <h:panelGroup>
+                    <p:inputText id="trigexp" size="60" value="#{jobBean.jd.cronex}" maxlength="40" label="触发时间配置"/>
+                    <p:commandLink value="帮助" action="cronexhelp" ajax="false" immediate="true" target="_blank"/>
+                </h:panelGroup> 
+                <p:message id="trigexpMessage" for="trigexp" />     
+            </h:panelGrid>
+            <h:panelGrid columns="2" width="50%;">
+                <p:outputLabel for="conditionSQL" value="条件限定语句（SQL）："/>
+                <p:inputTextarea rows="3" cols="140" maxlength="500" id="conditionSQL" value="#{jobBean.jd.conditionSQL}" title="只支持单一查询语句，返回值必须只是一条记录集。"/>
+                <h:outputLabel for="sourceSQL" value="源数据查询语句（SQL）:"/>
+                <p:inputTextarea rows="4" cols="140" maxlength="2000" id="sourceSQL" value="#{jobBean.jd.sourceSQL}" title="只支持单一查询语句。可以通过命名参数的方式，绑定条件查询结果集的值。如：条件结果里有字段为ID,可以用 :ID 方式来获取。"/>
+                <p:outputLabel for="targetSQL" value="目标数据操作语句（SQL）:"/>
+                <p:inputTextarea rows="5" cols="140" maxlength="5000" id="targetSQL" value="#{jobBean.jd.targetSQL}" title="支持多操作语句，语句之间用两个分号(;;)隔开，按顺序执行。可以绑定源数据结果集里的值，绑定方式同源数据查询SQL的方法一样。" />
+                <f:facet name="footer">       
+                    <div align="center">
+                        <p:commandButton value="保存" action="#{jobBean.add()}" ajax="false" update=":form:jobdata" icon="ui-icon-disk"/>
+                        <p:commandButton  value="取消" action="list" icon="ui-icon-cancel" ajax="false" immediate="true"/>
+                    </div>                        
+                </f:facet> 
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

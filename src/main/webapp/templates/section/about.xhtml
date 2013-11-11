@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>关于 ZK-DATASWAP 通用数据交换系统</title>
+    </h:head>
+    <h:body>
+        <div>
+            <!--            <h:panelGrid id="aboutprogram" columns="1">
+                            <h:graphicImage id="name" library="images/images/logo" name="zk_dataswap_logo_watercolor.jpg"/>
+                            <h:outputText id="version" value="2.0"/>
+                            <h:outputText id="copyright" value="中科理想公司 © 版权所有。保留所有权利。"/>
+                            <h:outputText id="copyright_en" value="Copyright © 2012 ZKLX. All Rights Reserved."/>
+                            <h:outputText id="website" value="http://www.med263.com"/>
+                        </h:panelGrid>-->
+        </div>
+
+        <p:overlayPanel for="aboutlnk" hideEffect="fade" dynamic="true" widgetVar="aboutDialog" style="padding-bottom: 10px;" >  
+            <h:panelGrid columns="1">
+                <h:graphicImage library="images/images/logo" name="zk_dataswap_logo_watercolor.jpg"/>
+                <h:outputText value="2.0"/>
+                <h:outputText value="中科理想公司 © 版权所有。保留所有权利。"/>
+                <h:outputText value="Copyright © 2012 ZKLX. All Rights Reserved."/>
+                <h:outputText value="http://www.med263.com"/>                
+            </h:panelGrid>
+            <div align="right">
+                <p:commandButton value="确定" onclick="aboutDialog.hide();" style="width: 65px;height: 26px;padding-top: 0px;padding-bottom: 10px;"/>
+            </div>
+        </p:overlayPanel>  
+    </h:body>
+</html>

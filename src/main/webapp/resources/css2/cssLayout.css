@@ -1,0 +1,78 @@
+
+#top {
+    position: relative;
+    overflow:  hidden;
+    /*    background-color: #036fab;*/
+    color: white;
+    /*    padding: 5px;*/
+    margin: 0px 0px 0px 0px;
+/*    border: 4px;*/
+}
+#topupper{
+    position:absolute; 
+    top:0px;
+    left:0px;
+    padding: 5px;
+    width:100%;
+    border: 4px;
+}
+
+#bottom {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {    
+    position:relative;
+    float: left;
+    background-color: aquamarine;
+    padding: 5px;
+    width: 152px;
+    background-image: url("#{resource['images/bg:leftmenu_blue.gif']}");
+    overflow: hidden;
+}
+
+#right {
+    position:relative;
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+    overflow:hidden;
+}
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 180px; 
+    font-size:  large; 
+    text-align: center;    
+}
+
+.right_content {
+    background-color: #dddddd;
+    /*    padding: 5px;*/
+    margin: 0px 0px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+
